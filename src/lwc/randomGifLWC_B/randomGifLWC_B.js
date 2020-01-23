@@ -18,11 +18,11 @@ export default class RandomGifLwc extends LightningElement {
         return !this.isLoading && !this.gifUrl;
     }
 
-    @wire(getRecord, { recordId: '$recordId', FIELDS })
+    @wire(getRecord, { recordId: '$recordId', fields : FIELDS })
     account({error, data}) {
         this.isLoading = false;
         if (data) {
-            this.gifUrl = data ? URL_PREFIX + data + URL_SUFFIX : '';
+            this.gifUrl = data.fields.Giphy_ID__c.value ? URL_PREFIX + data.fields.Giphy_ID__c.value + URL_SUFFIX : '';
         } else if (error) {
             this.showNotification('error', error);
             console.error(error);
