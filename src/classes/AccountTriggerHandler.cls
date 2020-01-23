@@ -46,6 +46,7 @@ public with sharing class AccountTriggerHandler {
      */
     private static void updateAccounts(Set<Id> recordIds, String gifId) {
         List<Account> accountsToUpdate = new List<Account>();
+        Set<Id> updatedAccountIds = new Set<Id>();
 
         for (Id accId : recordIds) {
             accountsToUpdate.add(new Account(Id = accId, Giphy_ID__c = gifId));
@@ -63,7 +64,13 @@ public with sharing class AccountTriggerHandler {
                     emailBody += error.getMessage() + ' ';
                 }
 
+            } else {
+                updatedAccountIds.add(accSaveRes.id);
             }
+        }
+
+        if (!updatedAccountIds.isEmpty()) {
+            sendPlatformEvents(updatedAccountIds);
         }
 
         if (String.isNotBlank(emailBody)) {
@@ -72,6 +79,19 @@ public with sharing class AccountTriggerHandler {
                     'Method name: AccountTriggerHandler.updateAccounts' + emailBody
             );
         }
+    }
+
+    /**
+     * @description Method used for sending platform events to notify Account.Industry field update
+     *
+     * @param accountIds - Ids of successfully updated records
+     */
+    private static void sendPlatformEvents(Set<Id> accountIds) {
+        List<Acc_Industry_Field__e> events = new List<Acc_Industry_Field__e>();
+        for (Id accId : accountIds) {
+            events.add(new Acc_Industry_Field__e(RecordId__c = accId));
+        }
+        EventBus.publish(events);
     }
 
     /**
