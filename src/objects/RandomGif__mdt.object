@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Value__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Value</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>RandomGif</label>
+    <listViews>
+        <fullName>Key_Value_View</fullName>
+        <columns>DeveloperName</columns>
+        <columns>Value__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>Key-Value View</label>
+    </listViews>
+    <pluralLabel>RandomGifs</pluralLabel>
+    <visibility>Protected</visibility>
+</CustomObject>
