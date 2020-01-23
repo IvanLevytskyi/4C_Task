@@ -18,7 +18,8 @@ private class RandomGifControllerTest {
         // Negative testing scenario (there is not any record with such id)
         Boolean thrownException = false;
         try {
-            RandomGifController.getGiphyId('INVALID_ID');
+            //Use Contact Id instead of Account's one
+            RandomGifController.getGiphyId('0030Y00000UiCLHQA3');
         } catch (Exception e) {
             thrownException = true;
         }
