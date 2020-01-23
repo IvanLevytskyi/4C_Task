@@ -1,0 +1,35 @@
+<aura:component
+        description="Aura + Apex Approach"
+        implements="force:hasRecordId,flexipage:availableForRecordHome"
+        controller="RandomGifController"
+>
+
+    <aura:attribute name="isLoading" type="Boolean" default="true" access="private"/>
+    <aura:attribute name="gifUrl" type="String" default="" access="private"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <lightning:card title="Random Gif (Aura + Apex Approach)">
+        <aura:if isTrue="{!v.isLoading}">
+
+            <div class="spinnerHolder">
+                <lightning:spinner alternativeText="Loading" size="medium"/>
+            </div>
+
+            <aura:set attribute="else">
+
+                <aura:if isTrue="{!v.gifUrl}">
+                    <img src="{!v.gifUrl}" alt="Random Gif" class="randomGifStyle slds-align_absolute-center"/>
+
+                    <aura:set attribute="else">
+                        <lightning:icon iconName="utility:animal_and_nature" class="slds-align_absolute-center"
+                                        size="large"/>
+                        <p class="slds-text-align_center slds-m-around_small">There is not any related gifs!</p>
+                    </aura:set>
+
+                </aura:if>
+
+            </aura:set>
+        </aura:if>
+    </lightning:card>
+</aura:component>

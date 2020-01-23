@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="Random Gif (LWC + uiRecordApi Approach)">
+        <div if:true={gifUrl}>
+            <img src={gifUrl} alt="Random Gif" class="randomGifStyle slds-align_absolute-center"/>
+        </div>
+        <div if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+        <div if:true={showDefaultIcon}>
+            <lightning-icon icon-name="utility:animal_and_nature" class="slds-align_absolute-center"
+                            size="large"></lightning-icon>
+            <p class="slds-text-align_center slds-m-around_small">There is not any related gifs!</p>
+        </div>
+    </lightning-card>
+</template>

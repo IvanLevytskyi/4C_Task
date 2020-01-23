@@ -1,0 +1,11 @@
+.randomGifStyle {
+    max-width: 300px;
+    max-height: 500px;
+}
+
+.spinnerHolder {
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+}

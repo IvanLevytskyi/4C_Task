@@ -1,0 +1,34 @@
+<aura:component description="Aura + force:recordData Approach" implements="force:hasRecordId,flexipage:availableForRecordHome">
+    <aura:attribute name="accountRecord" type="Object" access="private"/>
+    <aura:attribute name="recordLoadError" type="String" access="private"/>
+    <aura:attribute name="urlPrefix" type="String" default="https://media.giphy.com/media/" access="private"/>
+    <aura:attribute name="urlSuffix" type="String" default="/giphy.gif" access="private"/>
+
+    <force:recordData
+            recordId="{!v.recordId}"
+            fields="Giphy_ID__c"
+            targetFields="{!v.accountRecord}"
+            targetError="{!v.recordLoadError}"
+    />
+
+    <lightning:card title="Random Gif (Aura + Force:RecordData Approach)">
+
+        <aura:if isTrue="{!v.accountRecord.Giphy_ID__c}">
+            <img
+                    src="{!v.urlPrefix + v.accountRecord.Giphy_ID__c + v.urlSuffix}"
+                    alt="Random Gif" class="slds-align_absolute-center randomGifStyle"/>
+
+            <aura:set attribute="else">
+                <lightning:icon iconName="utility:animal_and_nature" class="slds-align_absolute-center" size="large"/>
+                <p class="slds-text-align_center slds-m-around_small">There is not any related gifs!</p>
+
+                <p class="{!v.recordLoadError ? 'slds-text-align_center slds-text-color_destructive' : 'slds-hide'}">
+                    {!v.recordLoadError}
+                </p>
+            </aura:set>
+
+        </aura:if>
+
+    </lightning:card>
+
+</aura:component>
